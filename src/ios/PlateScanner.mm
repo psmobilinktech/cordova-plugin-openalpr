@@ -68,10 +68,11 @@
     
     //Push all results to the response array.
     for (int i = 0; i < results.plates.size(); i++) {
-        alpr::AlprPlateResult plateResult = results.plates[i];
-        [bestPlates addObject:[[Plate alloc]initWithAlprPlate:&plateResult.bestPlate]];
+        for(int j = 0; j < results.plates[i].topNPlates.size(); j++){
+            alpr::AlprPlate plate = results.plates[i].topNPlates[j];
+            [bestPlates addObject:[[Plate alloc]initWithAlprPlate:&plate]];
+        }
     }
-    
     success(bestPlates);
 }
 
